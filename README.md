@@ -6,7 +6,7 @@ NOTE:  This has not been fully tested during a drop yet.  I have tried several o
 This script will simply open 10 unique browsers windows to the zotacstore.com address.
 
 ## Why
-This gives you more chances to get a lower number
+This gives you more chances to get a lower number in the queue.
 
 ## Execution
 Simply run the script in powershell.
