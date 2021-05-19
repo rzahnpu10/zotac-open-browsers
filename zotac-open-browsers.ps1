@@ -2,22 +2,24 @@
 $folder = "C:\temp"
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $val = 0
+$defaultprof = $env:LOCALAPPDATA + "\Google\Chrome\User Data\Default"
 
-#create folders
+#create storage folder
 if (!(Test-Path -Path $folder)) {
     New-Item -Path $folder -ItemType directory
     }
 
 
-#create user profiles
+#create user profiles and open chrome
 
 while ($val -ne 10)
 {
-    #New-Item -Path $folder + "\" + $profiles[$val] -ItemType directory
     $Path = $folder+ "\" + $profiles[$val]
-    New-Item -Path $Path -ItemType directory
-    Write-Host $Path
-    #Start-Process -FilePath "C:\Program Files\Google\Chrome\Application\chrome.exe --user-data-dir=$Path"
+    if (!(Test-Path -Path $Path)) {
+        New-Item -Path $Path -ItemType directory
+        New-Item -Path "$Path\Default" -ItemType directory
+        Copy-Item -Path "$defaultprof\*" -Destination "$Path\Default" -Recurse
+        }
     Start-Process -FilePath $chrome -ArgumentList "www.zotacstore.com --user-data-dir=$Path"
     $val++
     }
